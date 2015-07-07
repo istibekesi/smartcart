@@ -1,0 +1,21 @@
+{
+  "generator-jhipster": {
+    "baseName": "smartcart",
+    "packageName": "com.smartcart",
+    "packageFolder": "com/smartcart",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8",
+    "enableTranslation": true,
+    "rememberMeKey": "f350e8cdae99a8f4cfca6ce84470446318793445"
+  }
+}
