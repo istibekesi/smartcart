@@ -1,0 +1,22 @@
+{
+    "smartcartApp": {
+        "product" : {
+            "home": {
+                "title": "Products",
+                "createLabel": "Create a new Product",
+                "createOrEditLabel": "Create or edit a Product"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Product"
+            },
+            "barcode": "Barcode",
+            "name": "Name",
+            "description": "Description",
+            "unit": "Unit",
+            "sourceEdges": "sourceEdges"
+        }
+    }
+}

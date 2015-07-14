@@ -1,0 +1,20 @@
+{
+    "smartcartApp": {
+        "edge" : {
+            "home": {
+                "title": "Edges",
+                "createLabel": "Créer un nouveau Edge",
+                "createOrEditLabel": "Créer ou éditer un Edge"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Edge {{ id }} ?"
+            },
+            "detail": {
+                "title": "Edge"
+            },
+            "value": "Value",
+            "sourceProduct": "sourceProduct"
+        }
+    }
+}
+

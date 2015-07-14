@@ -1,0 +1,69 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "sourceEdges",
+            "relationshipNameCapitalized": "SourceEdges",
+            "relationshipFieldName": "sourceEdges",
+            "otherEntityName": "edge",
+            "relationshipType": "one-to-many",
+            "otherEntityNameCapitalized": "Edge",
+            "otherEntityRelationshipName": "sourceProduct"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "barcode",
+            "fieldType": "String",
+            "fieldIsEnum": false,
+            "fieldNameCapitalized": "Barcode",
+            "fieldNameUnderscored": "barcode",
+            "fieldInJavaBeanMethod": "Barcode",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldIsEnum": false,
+            "fieldNameCapitalized": "Name",
+            "fieldNameUnderscored": "name",
+            "fieldInJavaBeanMethod": "Name",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldIsEnum": false,
+            "fieldNameCapitalized": "Description",
+            "fieldNameUnderscored": "description",
+            "fieldInJavaBeanMethod": "Description",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "unit",
+            "fieldType": "UnitEnum",
+            "fieldIsEnum": true,
+            "fieldValues": "g,ml,piece",
+            "fieldNameCapitalized": "Unit",
+            "fieldNameUnderscored": "unit",
+            "fieldInJavaBeanMethod": "Unit",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOwnerOneToOne": false,
+    "fieldsContainOneToMany": true,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150714193638",
+    "dto": "no",
+    "pagination": "pager",
+    "validation": false
+}
