@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+   <changeSet author="Istvan (generated)" id="1436995182492-1">
+      <addColumn tableName="EDGE">
+         <column name="targetProduct_id" type="int8"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="Istvan (generated)" id="1436995182492-2">
+      <addForeignKeyConstraint baseColumnNames="targetProduct_id"
+                               baseTableName="EDGE"
+                               constraintName="FK_efn4yawk11cbngbet5o1vcmaa"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="PRODUCT"/>
+   </changeSet>
+</databaseChangeLog>

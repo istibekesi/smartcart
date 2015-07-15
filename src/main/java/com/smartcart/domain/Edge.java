@@ -34,6 +34,9 @@ public class Edge implements Serializable {
 
     @ManyToOne
     private Product sourceProduct;
+    
+    @ManyToOne
+    private Product targetProduct;
 
     public Long getId() {
         return id;
@@ -59,6 +62,14 @@ public class Edge implements Serializable {
         this.sourceProduct = product;
     }
 
+    public Product getTargetProduct() {
+        return targetProduct;
+    }
+
+    public void setTargetProduct(Product product) {
+        this.targetProduct = product;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
