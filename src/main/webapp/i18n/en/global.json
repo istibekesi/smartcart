@@ -8,6 +8,7 @@
                 "main": "Entities",
                 "product": "Product",
                 "edge": "Edge",
+                "category": "Category",
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

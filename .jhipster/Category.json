@@ -1,0 +1,51 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "children",
+            "relationshipNameCapitalized": "Children",
+            "relationshipFieldName": "children",
+            "otherEntityName": "category",
+            "relationshipType": "one-to-many",
+            "otherEntityNameCapitalized": "Category",
+            "otherEntityRelationshipName": "parent"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "parent",
+            "relationshipNameCapitalized": "Parent",
+            "relationshipFieldName": "parent",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-one",
+            "otherEntityNameCapitalized": "Category",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldIsEnum": false,
+            "fieldNameCapitalized": "Name",
+            "fieldNameUnderscored": "name",
+            "fieldInJavaBeanMethod": "Name",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOwnerOneToOne": false,
+    "fieldsContainOneToMany": true,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150716155536",
+    "dto": "no",
+    "pagination": "pager",
+    "validation": true
+}
