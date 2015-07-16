@@ -1,16 +1,24 @@
 package com.smartcart.domain;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
 
 
 /**
@@ -32,10 +40,12 @@ public class Edge implements Serializable {
     @Column(name = "value", precision=10, scale=2, nullable = false)
     private BigDecimal value;
 
-    @ManyToOne
+    @ManyToOne(optional=false)
+    @JoinColumn(name="sourceproduct_id", referencedColumnName="id", insertable=true, updatable=false)
     private Product sourceProduct;
     
-    @ManyToOne
+    @ManyToOne(optional=false)
+    @JoinColumn(name="targetproduct_id", referencedColumnName="id", insertable=true, updatable=false)
     private Product targetProduct;
 
     public Long getId() {
@@ -96,6 +106,8 @@ public class Edge implements Serializable {
         return "Edge{" +
                 "id=" + id +
                 ", value='" + value + "'" +
+                ", sourceProduct='" + sourceProduct + "'" +
+                ", targetProduct='" + targetProduct + "'" +
                 '}';
     }
 }

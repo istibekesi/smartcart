@@ -4,17 +4,17 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
    <changeSet author="Istvan (generated)" id="1436995182492-1">
+   <validCheckSum>7:5f92223a82cc9ff3bfe99baab65bc6dd</validCheckSum>
       <addColumn tableName="EDGE">
-         <column name="targetProduct_id" type="int8"/>
+         <column name="targetproduct_id" type="bigint"/>
       </addColumn>
    </changeSet>
    <changeSet author="Istvan (generated)" id="1436995182492-2">
-      <addForeignKeyConstraint baseColumnNames="targetProduct_id"
-                               baseTableName="EDGE"
-                               constraintName="FK_efn4yawk11cbngbet5o1vcmaa"
-                               deferrable="false"
-                               initiallyDeferred="false"
-                               referencedColumnNames="id"
-                               referencedTableName="PRODUCT"/>
+   <validCheckSum>7:10c37b395c9a47ccaa2a4bbebef2240b</validCheckSum>
+      <addForeignKeyConstraint baseColumnNames="targetproduct_id"
+                            baseTableName="EDGE"
+                            constraintName="fk_edge_targetproduct_id"
+                            referencedColumnNames="id"
+                            referencedTableName="PRODUCT"/>
    </changeSet>
 </databaseChangeLog>

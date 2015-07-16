@@ -13,7 +13,8 @@
                 "title": "Edge"
             },
             "value": "Value",
-            "sourceProduct": "sourceProduct"
+            "sourceProduct": "SourceProduct",
+            "targetProduct": "TargetProduct"
         }
     }
 }

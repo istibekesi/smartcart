@@ -66,8 +66,29 @@
 
                         <div class="form-group">
                             <label translate="smartcartApp.edge.sourceProduct">sourceProduct</label>
-                            <select class="form-control" name="sourceProduct" ng-model="edge.sourceProduct.id" ng-options="product.id as product.SourceProduct for product in products">
+                            <select class="form-control" name="sourceProduct" ng-model="edge.sourceProduct.id" required ng-options="product.id as product.name for product in products">
                             </select>
+                            {{edge.sourceProduct.id}}
+                            
+							<div ng-show="editForm.value.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.value.$error.required" translate="entity.validation.required">
+                                    Source Product is required.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label translate="smartcartApp.edge.targetProduct">targetProduct</label>
+                            <select class="form-control" name="targetProduct" ng-model="edge.targetProduct.id" required ng-options="product.id as product.name for product in products">
+                            </select>
+                            
+							<div ng-show="editForm.value.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.value.$error.required" translate="entity.validation.required">
+                                    Target Product is required.
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -115,6 +136,7 @@
                     <th translate="global.field.id">ID</th>
                     <th translate="smartcartApp.edge.value">Value</th>
                     <th translate="smartcartApp.edge.sourceProduct">sourceProduct</th>
+                    <th translate="smartcartApp.edge.targetProduct">sourceProduct</th>
                     <th></th>
                 </tr>
             </thead>
@@ -122,7 +144,8 @@
                 <tr ng-repeat="edge in edges">
                     <td><a ui-sref="edgeDetail({id:edge.id})">{{edge.id}}</a></td>
                     <td>{{edge.value}}</td>
-                    <td>{{edge.sourceProduct.SourceProduct}}</td>
+                    <td>{{edge.sourceProduct.name}}</td>
+                    <td>{{edge.targetProduct.name}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="edgeDetail({id:edge.id})"
