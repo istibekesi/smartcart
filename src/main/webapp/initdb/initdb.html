@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="initDbApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>SmartCart database initializer</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    
+    <link rel="stylesheet" href="bootstrap_slate.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  </head>
+
+  <body ng-controller="MainCtrl">
+  
+  	<div class="container">
+	    <h3>Hello {{name}}!</h3>
+	    
+	    <div class="well">
+	    	This page may be used to initialize the database using dummy test data!
+	    </div>
+	    
+	    <button class="btn btn-info" ng-click="initDb()">
+	    	<i ng-show="!loading" class="fa fa-database"></i>
+	    	<i ng-show="loading" class="fa fa-spinner fa-pulse"></i> 
+	    	Load!
+	    </button>
+	    
+	</div>
+    
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="scripts/initDbApp.js"></script>
+  </body>
+
+</html>
