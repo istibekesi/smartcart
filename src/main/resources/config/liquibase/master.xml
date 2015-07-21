@@ -14,7 +14,10 @@
     <!-- Constraint added: foreign key not null in edges -->
     <include file="classpath:config/liquibase/changelog/20150716152927_changelog.xml" relativeToChangelogFile="false"/>
     
-    
+    <!-- Category -->
     <include file="classpath:config/liquibase/changelog/20150716155536_added_entity_Category.xml" relativeToChangelogFile="false"/>
+    
+    <!-- Category fining -->
+    <include file="classpath:config/liquibase/changelog/20150722004357_changelog.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+   <changeSet author="Istvan (generated)" id="1437518640191-1">
+      <addColumn tableName="CATEGORY">
+         <column name="description" type="varchar(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="Istvan (generated)" id="1437518640191-2">
+      <addUniqueConstraint columnNames="name"
+                           constraintName="UC_CATEGORYNAME_COL"
+                           deferrable="false"
+                           disabled="false"
+                           initiallyDeferred="false"
+                           tableName="CATEGORY"/>
+   </changeSet>
+</databaseChangeLog>

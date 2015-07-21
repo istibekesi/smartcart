@@ -25,15 +25,33 @@ public class DatabaseInitializerService {
         categoryRepository.deleteAll();
         log.debug("Database initialization - Categories deleted!");
         
-        Category category = 
-        		new Category("FRUIT_AND_VEGETABLES")
-        			.addSub(new Category("VEGETABLES"))
-        			.addSub(new Category("FRUIT")
-        				.addSub(new Category("APPLE"))
-        				.addSub(new Category("PEAR"))
-        			);
+        Category[] categories = { 
+        		new Category("MC_FRUIT_AND_VEGETABLES", "Zöldség, gyümölcs")
+        			.addSub(new Category("VEGETABLES", "Zoldség"))
+        			.addSub(new Category("FRUIT", "Gyümölcs")
+       			), 
+        		new Category("MC_MILK_EGG", "Tejtermék")
+    				.addSub(new Category("MILK", "Tej"))
+    				.addSub(new Category("EGG", "Tojás")
+    			), 
+        		new Category("MC_BAKERY", "Pékáru"), 
+				new Category("MC_MEAT", "Hús"),
+				new Category("MC_FOOD", "Alapvető élémiszer"),
+				new Category("MC_DRINKS", "Üdítő")
+					.addSub(new Category("MINERAL_WATER", "Ásványvíz"))
+					.addSub(new Category("COFFEE", "Kávé"))
+					.addSub(new Category("TEE", "Tea"))
+					.addSub(new Category("JUICE", "Gyümölcslé"))
+					.addSub(new Category("BEVREGES", "Üdítőitalok")
+				),
+				new Category("MC_ALCOHOLIC", "Alkoholos italok")
+        };
         
-        callBfs(category);
+        
+        for (Category c : categories) {
+        	callBfs(c);
+        }
+        //callBfs(category);
         
         log.debug("Database initialization finished!");
         return true;

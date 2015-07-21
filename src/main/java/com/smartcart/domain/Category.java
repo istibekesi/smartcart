@@ -36,8 +36,11 @@ public class Category implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
+    
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(mappedBy = "parent")
     @JsonIgnore
@@ -51,6 +54,11 @@ public class Category implements Serializable {
     
     public Category(String name ) {
     	this.name = name;
+    };
+    
+    public Category(String name, String desc ) {
+    	this.name = name;
+    	this.description = desc;
     };
     
     /*
@@ -147,5 +155,15 @@ public class Category implements Serializable {
 		this.children.add(kid);
 		return this;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 
 }
