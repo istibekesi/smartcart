@@ -1,12 +1,7 @@
 package com.smartcart.service;
 
 
-import java.util.HashSet;
-
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,39 +21,30 @@ public class DatabaseInitializerService {
 	
     public boolean loadData() {
         log.debug("Database initialization started...");
-
-        /*
+        
+        categoryRepository.deleteAll();
+        log.debug("Database initialization - Categories deleted!");
+        
         Category category = 
-        		new Category.ProductCategoryBuilder("FRUIT_AND_VEGETABLES")
-        			.sub(new Category.ProductCategoryBuilder("FRUIT").build())
-        			.sub(new Category.ProductCategoryBuilder("VEGETABLES").build())
-        		.build();
-        categoryRepository.save(category);
-        */
+        		new Category("FRUIT_AND_VEGETABLES")
+        			.addSub(new Category("VEGETABLES"))
+        			.addSub(new Category("FRUIT")
+        				.addSub(new Category("APPLE"))
+        				.addSub(new Category("PEAR"))
+        			);
         
-        Category category1 = new Category();
-        category1.setName("FRUIT_AND_VEGETABLES");
-        category1.setParent(null);
-        
-        Category category1_1 = new Category();
-        category1_1.setName("FRUIT");
-        category1_1.setParent(category1);
-        
-        Category category1_2 = new Category();
-        category1_2.setName("VEGETABLES");
-        category1_2.setParent(category1);
-        
-        HashSet<Category> c = new HashSet<Category>();
-        c.add(category1_1);
-        c.add(category1_2);
-        category1.setChildren(c);
-        
-        categoryRepository.save(category1);
-        categoryRepository.save(category1_1);
-        categoryRepository.save(category1_2);
-        
+        callBfs(category);
         
         log.debug("Database initialization finished!");
         return true;
+    }
+    
+    /**
+     * Recursive Breadth First to save 
+     * @param category
+     */
+    private void callBfs(Category category) {
+        categoryRepository.save(category);
+        category.getChildren().forEach(c -> callBfs(c));
     }
 }

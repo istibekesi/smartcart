@@ -47,19 +47,21 @@ public class Category implements Serializable {
     @ManyToOne
     private Category parent;
     
-    
-    
     public Category() {};
     
+    public Category(String name ) {
+    	this.name = name;
+    };
+    
+    /*
     private Category(ProductCategoryBuilder builder) {
     	this.name = builder.name;
-    	this.children = builder.children;
     }
     
     
     public static class ProductCategoryBuilder {
     	private final String name;
-    	private Set<Category> children = new HashSet<>();;
+    	private Set<Category> children = new HashSet<>();
     	
     	public ProductCategoryBuilder(String name) {
     		this.name = name;
@@ -73,7 +75,9 @@ public class Category implements Serializable {
         public Category build() {
         	return new Category(this);
         }
+
     }
+    */
     
 
     public Long getId() {
@@ -120,6 +124,7 @@ public class Category implements Serializable {
         Category category = (Category) o;
 
         if ( ! Objects.equals(id, category.id)) return false;
+        if ( ! Objects.equals(name, category.name)) return false;
 
         return true;
     }
@@ -136,5 +141,11 @@ public class Category implements Serializable {
                 ", name='" + name + "'" +
                 '}';
     }
+
+	public Category addSub(Category kid) {
+		kid.setParent(this);
+		this.children.add(kid);
+		return this;
+	}
 
 }
