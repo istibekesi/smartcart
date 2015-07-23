@@ -2,6 +2,8 @@ package com.smartcart.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -48,7 +50,15 @@ public class Edge implements Serializable {
     @JoinColumn(name="targetproduct_id", referencedColumnName="id", insertable=true, updatable=false)
     private Product targetProduct;
 
-    public Long getId() {
+    public Edge() {};
+    
+    public Edge(Product product, Product product2, BigDecimal d) {
+    	this.sourceProduct = product;
+    	this.targetProduct = product2;
+    	this.value = d;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -110,4 +120,26 @@ public class Edge implements Serializable {
                 ", targetProduct='" + targetProduct + "'" +
                 '}';
     }
+
+	public static List<Edge> edgeBuilder(Product product, Product product2,	BigDecimal bigDecimal) {
+		Edge edgeTo = new Edge(product, product2, bigDecimal);
+		Edge edgeBack = new Edge(product2, product, bigDecimal);
+		
+		product.getSourceEdgess().add(edgeTo);
+		
+		return Arrays.asList(edgeTo, edgeBack);
+	}
+
+	public static List<Edge> edgeBuilder(List<Product> products, String bar1, String bar2,	BigDecimal bigDecimal) {
+		Product p1 = products
+			.stream()
+			.filter(p -> p.getBarcode().equals(bar1)).findFirst().get();
+		
+		Product p2 = products
+				.stream()
+				.filter(p -> p.getBarcode().equals(bar2)).findFirst().get(); 
+		
+		return edgeBuilder(p1, p2, bigDecimal);
+	}
+    
 }

@@ -19,5 +19,8 @@
     
     <!-- Category fining -->
     <include file="classpath:config/liquibase/changelog/20150722004357_changelog.xml" relativeToChangelogFile="false"/>
+    
+    <include file="classpath:config/liquibase/changelog/20150723145720_changelog.xml" relativeToChangelogFile="false"/>
+    
     <!-- JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

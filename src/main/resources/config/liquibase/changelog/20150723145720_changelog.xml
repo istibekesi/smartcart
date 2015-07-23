@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+   <changeSet author="ibekesi (generated)" id="1437656252537-1">
+      <addColumn tableName="PRODUCT">
+         <column name="category" type="int8"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="ibekesi (generated)" id="1437656252537-2">
+      <addColumn tableName="PRODUCT">
+         <column name="quantity" type="int8"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="ibekesi (generated)" id="1437656252537-3">
+      <addUniqueConstraint columnNames="barcode"
+                           constraintName="UC_PRODUCTBARCODE_COL"
+                           deferrable="false"
+                           disabled="false"
+                           initiallyDeferred="false"
+                           tableName="PRODUCT"/>
+   </changeSet>
+   <changeSet author="ibekesi (generated)" id="1437656252537-4">
+      <addForeignKeyConstraint baseColumnNames="category"
+                               baseTableName="PRODUCT"
+                               constraintName="fk_category_id"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="CATEGORY"/>
+   </changeSet>
+</databaseChangeLog>
