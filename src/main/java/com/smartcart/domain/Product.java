@@ -2,8 +2,10 @@ package com.smartcart.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,6 +64,10 @@ public class Product implements Serializable {
     @ManyToOne(optional=true)
     @JoinColumn(name="category", referencedColumnName="id", insertable=true, updatable=true)
     private Category category;
+    
+    @OneToMany(mappedBy = "product")
+    private Set<Price> productPrices = new HashSet<>();
+    
 
     public Product() {};
     
@@ -139,6 +145,13 @@ public class Product implements Serializable {
 		this.category = category;
 	}
 
+	public Set<Price> getProductPrices() {
+		return productPrices;
+	}
+
+	public void setProductPrices(Set<Price> productPrices) {
+		this.productPrices = productPrices;
+	}
 
 	@Override
     public boolean equals(Object o) {

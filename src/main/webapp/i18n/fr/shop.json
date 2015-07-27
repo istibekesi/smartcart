@@ -1,0 +1,21 @@
+{
+    "smartcartApp": {
+        "shop" : {
+            "home": {
+                "title": "Shops",
+                "createLabel": "Créer un nouveau Shop",
+                "createOrEditLabel": "Créer ou éditer un Shop"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Shop {{ id }} ?"
+            },
+            "detail": {
+                "title": "Shop"
+            },
+            "name": "Name",
+            "address": "Address",
+            "price": "price"
+        }
+    }
+}
+

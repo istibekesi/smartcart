@@ -9,6 +9,8 @@
                 "product": "Product",
                 "edge": "Edge",
                 "category": "Category",
+                "shop": "Shop",
+                "price": "Price",
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

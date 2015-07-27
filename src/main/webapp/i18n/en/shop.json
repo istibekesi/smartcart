@@ -1,0 +1,20 @@
+{
+    "smartcartApp": {
+        "shop" : {
+            "home": {
+                "title": "Shops",
+                "createLabel": "Create a new Shop",
+                "createOrEditLabel": "Create or edit a Shop"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Shop {{ id }}?"
+            },
+            "detail": {
+                "title": "Shop"
+            },
+            "name": "Name",
+            "address": "Address",
+            "price": "price"
+        }
+    }
+}
