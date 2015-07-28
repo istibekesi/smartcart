@@ -1,6 +1,14 @@
 package com.smartcart;
 
-import com.smartcart.config.Constants;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -10,15 +18,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
-import com.google.common.base.Joiner;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
+import com.google.common.base.Joiner;
+import com.smartcart.config.Constants;
+import com.smartcart.mygraph.MyGraph;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
@@ -77,6 +80,10 @@ public class Application {
             InetAddress.getLocalHost().getHostAddress(),
             env.getProperty("server.port"));
 
+        // Initialize my first GraphStream
+        MyGraph myGraph = new MyGraph();
+        myGraph.init();
+        
     }
 
     /**
