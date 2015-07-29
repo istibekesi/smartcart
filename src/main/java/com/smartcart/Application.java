@@ -81,8 +81,7 @@ public class Application {
             env.getProperty("server.port"));
 
         // Initialize my first GraphStream
-        MyGraph myGraph = new MyGraph();
-        myGraph.init();
+        MyGraph.init();
         
     }
 

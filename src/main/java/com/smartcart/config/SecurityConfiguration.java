@@ -80,7 +80,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf()
-            .ignoringAntMatchers("/websocket/**").ignoringAntMatchers("/api/initDb")
+            .ignoringAntMatchers("/websocket/**")
+            	.ignoringAntMatchers("/api/initDb")
+            	.ignoringAntMatchers("/api/graphPng")
         .and()
             .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
             .exceptionHandling()

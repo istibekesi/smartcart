@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="smartAdminApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>SmartCart database initializer</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    
+    <link rel="stylesheet" href="bootstrap_slate.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  </head>
+
+  <body ng-controller="MainCtrl">
+  
+  	<div class="container">
+  	
+  		<div class="page-header">
+              <h1 id="navbar">Hello {{name}}!</h1>
+        </div>
+        
+        <div class="row">
+        	<h2>Product Graph</h2>
+		    <p class="lead">
+		    	Visualize product graph
+		    <button class="btn btn-info pull-right" ng-click="reloadGraphPng()">
+		    	<i ng-show="!loadingPng" class="fa fa-image"></i>
+		    	<i ng-show="loadingPng" class="fa fa-spinner fa-pulse"></i> 
+		    	Re-Draw!
+		    </button>
+		    </p>
+		    
+		    
+		    
+			<img ng-src="{{graphImageUrl}}" alt="Product Graph"> 
+		</div>
+		
+		<hr/>
+        
+        <div class="row">
+        	<h2>Database</h2>
+		    <p class="lead">
+		    	This page may be used to initialize the database using dummy test data!
+		    </p>
+			<div class="well well-sm">
+			  Warning! Reloading the database will delete all existing data and restores the factory defaults!
+			</div>
+
+		    <button class="btn btn-info" ng-click="initDb()">
+		    	<i ng-show="!loading" class="fa fa-database"></i>
+		    	<i ng-show="loading" class="fa fa-spinner fa-pulse"></i> 
+		    	Restore!
+		    </button>
+		</div>
+		
+				<hr/>
+        
+	    
+        <div class="row">
+        	<h2>jHipster</h2>
+			<div  class="lead">
+				<p>
+					Back to <a href="../">jHipster Admin</a> page
+				</p>
+			</div>
+		</div>
+	    
+	    
+	</div>
+    
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="scripts/smartAdminApp.js"></script>
+  </body>
+
+</html>
