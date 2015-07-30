@@ -1,0 +1,10 @@
+graph {
+    fill-color: yellow;
+}
+node {
+    size: 10px, 15px;
+    shape: box;
+    fill-color: green;
+    stroke-mode: plain;
+    stroke-color: yellow;
+}

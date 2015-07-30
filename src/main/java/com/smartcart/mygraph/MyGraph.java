@@ -1,5 +1,6 @@
 package com.smartcart.mygraph;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -14,12 +15,10 @@ import org.graphstream.stream.file.FileSinkImages;
 import org.graphstream.stream.file.FileSinkImages.LayoutPolicy;
 import org.graphstream.stream.file.FileSinkImages.OutputType;
 import org.graphstream.stream.file.FileSinkImages.Resolutions;
-import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.findShortestPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.smartcart.Application;
 import com.smartcart.domain.Edge;
 import com.smartcart.domain.Product;
 import com.smartcart.repository.EdgeRepository;
@@ -38,7 +37,7 @@ public class MyGraph {
 	
 	@Inject
 	private EdgeRepository edgeRepository;
-    
+	
 	private static final Graph graph = new SingleGraph("My Product Graph");
 	
 	protected MyGraph() {
@@ -95,8 +94,12 @@ public class MyGraph {
 	
 	public void drawIt(){
 		try {
+			
+			graph.addAttribute("ui.stylesheet", "url('"+ new File("src/main/java/com/smartcart/mygraph/graphStyle.css").toURI() +"')");
+			//graph.addAttribute("ui.stylesheet", "url('"+servletContext.getContextPath()+"http://smartAdmin/graphStyle.css')");
+			
 			FileSinkImages pic = new FileSinkImages(OutputType.PNG, Resolutions.VGA);
-			 
+			
 			pic.setLayoutPolicy(LayoutPolicy.COMPUTED_FULLY_AT_NEW_IMAGE);
 			
 			pic.writeAll(graph, "src/main/webapp/smartAdmin/smartGraph.png");
