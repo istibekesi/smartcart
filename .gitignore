@@ -122,3 +122,5 @@ Desktop.ini
 ######################
 !gradle/wrapper/gradle-wrapper.jar
 /target/
+
+src/main/webapp/smartAdmin/smartGraph.png
