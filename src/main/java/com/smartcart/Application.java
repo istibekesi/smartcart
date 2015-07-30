@@ -80,9 +80,6 @@ public class Application {
             InetAddress.getLocalHost().getHostAddress(),
             env.getProperty("server.port"));
 
-        // Initialize my first GraphStream
-        MyGraph.init();
-        
     }
 
     /**

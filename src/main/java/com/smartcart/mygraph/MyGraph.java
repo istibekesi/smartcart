@@ -1,28 +1,45 @@
 package com.smartcart.mygraph;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.stream.file.FileSinkImages;
 import org.graphstream.stream.file.FileSinkImages.LayoutPolicy;
 import org.graphstream.stream.file.FileSinkImages.OutputType;
 import org.graphstream.stream.file.FileSinkImages.Resolutions;
+import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.findShortestPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.smartcart.Application;
+import com.smartcart.domain.Edge;
+import com.smartcart.domain.Product;
+import com.smartcart.repository.EdgeRepository;
+import com.smartcart.repository.ProductRepository;
 
 /**
- * Singleton pattern - we may have only one graph instance
- * 
  * @author Istvan
  */
+@Service
 public class MyGraph {
 	
 	private static final Logger log = LoggerFactory.getLogger(MyGraph.class);
 
-	private static final Graph graph = new SingleGraph("My First graph 1");
+	@Inject
+	private ProductRepository productRepository;
+	
+	@Inject
+	private EdgeRepository edgeRepository;
+    
+	private static final Graph graph = new SingleGraph("My Product Graph");
 	
 	protected MyGraph() {
 	}
@@ -31,7 +48,8 @@ public class MyGraph {
 		return graph;
 	}
 	
-	public static void init() {
+	@PostConstruct
+	public void init() {
 
 		graph.addNode("A");
 		graph.addNode("B");
@@ -45,18 +63,37 @@ public class MyGraph {
 
 	}
 
-	public static void addNode() {
+	public void addNode() {
 		
-		if (graph.getNode("X") != null) {
-			graph.removeNode("X");
-		} else {
-			graph.addNode("X");
-		}		
+		Iterator<org.graphstream.graph.Edge> edgeIterator = graph.getEdgeIterator();
+		for (; edgeIterator.hasNext() ; ){
+			edgeIterator.next();
+			edgeIterator.remove();
+		}
+		
+		Iterator<Node> nodeIterator = graph.getNodeIterator();
+		for (; nodeIterator.hasNext() ; ){
+			nodeIterator.next();
+			nodeIterator.remove();
+		}
+		
+		List<Product> nodes = productRepository.findAll();
+		List<Edge> edges = edgeRepository.findAll();
+		
+		nodes.forEach(n -> graph.addNode(String.valueOf(n.getId())));
+		edges.forEach(e -> 
+			graph.addEdge(
+					String.valueOf(e.getSourceProduct().getId())+String.valueOf(e.getTargetProduct().getId()),
+					String.valueOf(e.getSourceProduct().getId()),
+					String.valueOf(e.getTargetProduct().getId()),
+					true
+			)
+		);
 		
 		
 	}
 	
-	public static void drawIt(){
+	public void drawIt(){
 		try {
 			FileSinkImages pic = new FileSinkImages(OutputType.PNG, Resolutions.VGA);
 			 
