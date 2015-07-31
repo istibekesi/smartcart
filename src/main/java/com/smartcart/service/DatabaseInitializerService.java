@@ -90,11 +90,11 @@ public class DatabaseInitializerService {
         );
         
         List<Product> products = new ArrayList<Product>();
-        products.add(new Product("5990000000001", "Beck's világos sör 5%", "", UnitEnum.ml, 500));
-        products.add(new Product("5990000000002", "Carlsberg minőségi világos sör 5%", "", UnitEnum.ml, 500));
-        products.add(new Product("5990000000003", "Dreher Classic világos sör 5,2%", "", UnitEnum.ml, 500));
-        products.add(new Product("5990000000004", "Heineken prémium világos sör 5%", "", UnitEnum.ml, 400));
-        products.add(new Product("5990000000005", "Heineken prémium világos sör 5%", "", UnitEnum.ml, 330));
+        products.add(Product.productBuilder("5990000000001", "Beck's világos sör 5%", "", UnitEnum.ml, 500, categories, "C_BEER"));
+        products.add(Product.productBuilder("5990000000002", "Carlsberg minőségi világos sör 5%", "", UnitEnum.ml, 500, categories, "C_BEER"));
+        products.add(Product.productBuilder("5990000000003", "Dreher Classic világos sör 5,2%", "", UnitEnum.ml, 500, categories, "C_BEER"));
+        products.add(Product.productBuilder("5990000000004", "Heineken prémium világos sör 5%", "", UnitEnum.ml, 400, categories, "C_BEER"));
+        products.add(Product.productBuilder("5990000000005", "Heineken prémium világos sör 5%", "", UnitEnum.ml, 330, categories, "C_BEER"));
 
         List<Edge> edges = new ArrayList<Edge>();
         edges.addAll(Edge.edgeBuilder(products, "5990000000001", "5990000000002", new BigDecimal(0.80) ));

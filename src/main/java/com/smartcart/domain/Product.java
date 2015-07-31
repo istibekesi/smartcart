@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -184,4 +185,32 @@ public class Product implements Serializable {
                 ", unit='" + unit + "'" +
                 '}';
     }
+
+	public static Product productBuilder(String barcode, String name, String descriptioon, UnitEnum unit, int quantity, List<Category> categories, String categoryName) {
+		Product p = new Product(barcode, name, descriptioon, unit, quantity);
+		
+		Optional<Category> mainCategory = categories
+			.stream()
+			.filter(cat -> findCategory(cat, categoryName).isPresent())
+			.findFirst();
+		
+		if (mainCategory.isPresent()) {
+			p.setCategory( (findCategory(mainCategory.get(), categoryName)).get() );
+		}
+		
+		return p;
+	}
+	
+	
+	private static Optional<Category> findCategory(Category c, String name) {
+		if (name.equals(c.getName())) {
+			return Optional.of(c);
+		}
+		
+		return c.getChildren()
+				.stream()
+				.filter(kid -> findCategory(kid, name).isPresent())
+				.findFirst();
+		
+	}
 }
