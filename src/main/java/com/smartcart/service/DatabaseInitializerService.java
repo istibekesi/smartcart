@@ -1,9 +1,6 @@
 package com.smartcart.service;
 
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,12 +14,12 @@ import com.smartcart.domain.Edge;
 import com.smartcart.domain.Price;
 import com.smartcart.domain.Product;
 import com.smartcart.domain.Shop;
-import com.smartcart.domain.enumeration.UnitEnum;
 import com.smartcart.repository.CategoryRepository;
 import com.smartcart.repository.EdgeRepository;
 import com.smartcart.repository.PriceRepository;
 import com.smartcart.repository.ProductRepository;
 import com.smartcart.repository.ShopRepository;
+import com.smartcart.service.util.DatabaseInitializerHelper;
 
 
 @Service
@@ -54,67 +51,24 @@ public class DatabaseInitializerService {
         priceRepository.deleteAll();
         log.debug("Database initialization - Prices deleted!");
         
-        categoryRepository.deleteAll();
-        log.debug("Database initialization - Categories deleted!");
-        
         shopRepository.deleteAll();
         log.debug("Database initialization - Shops deleted!");
 
         productRepository.deleteAll();
         log.debug("Database initialization - Products deleted!");
         
-        List<Category> categories = Arrays.asList( 
-        		new Category("MC_FRUIT_AND_VEGETABLES", "Zöldség, gyümölcs")
-        			.addSub(new Category("C_VEGETABLES", "Zoldség"))
-        			.addSub(new Category("C_FRUIT", "Gyümölcs")
-       			), 
-        		new Category("MC_MILK_EGG", "Tejtermék")
-    				.addSub(new Category("C_MILK", "Tej"))
-    				.addSub(new Category("C_EGG", "Tojás")
-    			), 
-        		new Category("MC_BAKERY", "Pékáru"), 
-				new Category("MC_MEAT", "Hús"),
-				new Category("MC_FOOD", "Alapvető élémiszer"),
-				new Category("MC_DRINKS", "Üdítő")
-					.addSub(new Category("C_MINERAL_WATER", "Ásványvíz"))
-					.addSub(new Category("C_COFFEE", "Kávé"))
-					.addSub(new Category("C_TEE", "Tea"))
-					.addSub(new Category("C_JUICE", "Gyümölcslé"))
-					.addSub(new Category("C_BEVERAGES", "Üdítőitalok")
-				),
-				new Category("MC_ALCOHOLIC", "Alkoholos italok")
-        			.addSub(new Category("C_BEER", "Sör"))
-        			.addSub(new Category("C_CIDER", "Cider"))
-        			.addSub(new Category("C_LIQUOR", "Szeszesital"))
-        			.addSub(new Category("C_WINE", "Bor"))
-        );
+        categoryRepository.deleteAll();
+        log.debug("Database initialization - Categories deleted!");
         
-        List<Product> products = new ArrayList<Product>();
-        products.add(Product.productBuilder("5990000000001", "Beck's világos sör 5%", "", UnitEnum.ml, 500, categories, "C_BEER"));
-        products.add(Product.productBuilder("5990000000002", "Carlsberg minőségi világos sör 5%", "", UnitEnum.ml, 500, categories, "C_BEER"));
-        products.add(Product.productBuilder("5990000000003", "Dreher Classic világos sör 5,2%", "", UnitEnum.ml, 500, categories, "C_BEER"));
-        products.add(Product.productBuilder("5990000000004", "Heineken prémium világos sör 5%", "", UnitEnum.ml, 400, categories, "C_BEER"));
-        products.add(Product.productBuilder("5990000000005", "Heineken prémium világos sör 5%", "", UnitEnum.ml, 330, categories, "C_BEER"));
+        List<Category> categories = DatabaseInitializerHelper.initCategories();
+        
+        List<Product> products = DatabaseInitializerHelper.initProducts(categories);
 
-        List<Edge> edges = new ArrayList<Edge>();
-        edges.addAll(Edge.edgeBuilder(products, "5990000000001", "5990000000002", new BigDecimal(0.80) ));
-        edges.addAll(Edge.edgeBuilder(products, "5990000000002", "5990000000003", new BigDecimal(0.70) ));
-        edges.addAll(Edge.edgeBuilder(products, "5990000000003", "5990000000004", new BigDecimal(0.75) ));
-        edges.addAll(Edge.edgeBuilder(products, "5990000000004", "5990000000005", new BigDecimal(0.75) ));
-        edges.addAll(Edge.edgeBuilder(products, "5990000000005", "5990000000001", new BigDecimal(0.75) ));
+        List<Edge> edges = DatabaseInitializerHelper.initEdges(products);
         
-        List<Shop> shops = new ArrayList<Shop>();
-        shops.add(new Shop("TESCO"));
-        shops.add(new Shop("INTERSPAR"));
-        shops.add(new Shop("LIDL"));
-        shops.add(new Shop("ALDI"));
-        shops.add(new Shop("PENNY"));
-        shops.add(new Shop("CBA"));
-        
-        List<Price> prices = new ArrayList<Price>();
-        prices.add(Price.priceBuilder(products, shops, "5990000000001", "TESCO", new BigDecimal(199)));
-        prices.add(Price.priceBuilder(products, shops, "5990000000001", "INTERSPAR", new BigDecimal(229)));
-        prices.add(Price.priceBuilder(products, shops, "5990000000001", "ALDI", new BigDecimal(219)));
+        List<Shop> shops =  DatabaseInitializerHelper.initShops();
+
+        List<Price> prices =  DatabaseInitializerHelper.initPrices(products, shops);
 
         categories.forEach(c -> callBfs(c));
         products.forEach(p -> productRepository.save(p));

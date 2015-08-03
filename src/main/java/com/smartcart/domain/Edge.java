@@ -2,9 +2,11 @@ package com.smartcart.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +22,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 
@@ -31,6 +35,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName="edge")
 public class Edge implements Serializable {
+	
+	private static final Logger log = LoggerFactory.getLogger(Edge.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -124,10 +130,31 @@ public class Edge implements Serializable {
 	public static List<Edge> edgeBuilder(Product product, Product product2,	BigDecimal bigDecimal) {
 		Edge edgeTo = new Edge(product, product2, bigDecimal);
 		Edge edgeBack = new Edge(product2, product, bigDecimal);
+
+		Optional<Edge> edgeToExist = product
+										.getSourceEdgess().stream()
+										.filter(se -> se.getTargetProduct() == product2 )
+										.findFirst();
 		
-		product.getSourceEdgess().add(edgeTo);
+		if (edgeToExist.isPresent()) {
+			edgeToExist.get().setValue(bigDecimal);
+			Optional<Edge> edgeBackExist = edgeToExist.get()
+				.getTargetProduct()
+					.getSourceEdgess().stream()
+					.filter(be -> be.getTargetProduct() == product)
+					.findFirst();
+			if (edgeBackExist.isPresent()) {
+				edgeBackExist.get().setValue(bigDecimal);
+			}
 		
-		return Arrays.asList(edgeTo, edgeBack);
+		} else {
+			product.getSourceEdgess().add(edgeTo);
+			edgeTo.getTargetProduct().getSourceEdgess().add(edgeBack);
+			return Arrays.asList(edgeTo, edgeBack);
+		}
+		
+		return new ArrayList<Edge>();
+		
 	}
 
 	public static List<Edge> edgeBuilder(List<Product> products, String bar1, String bar2,	BigDecimal bigDecimal) {

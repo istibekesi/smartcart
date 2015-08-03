@@ -21,7 +21,6 @@ import org.springframework.core.env.SimpleCommandLinePropertySource;
 
 import com.google.common.base.Joiner;
 import com.smartcart.config.Constants;
-import com.smartcart.mygraph.MyGraph;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
@@ -43,6 +42,7 @@ public class Application {
      */
     @PostConstruct
     public void initApplication() throws IOException {
+    	
         if (env.getActiveProfiles().length == 0) {
             log.warn("No Spring profile configured, running with default configuration");
         } else {
@@ -67,6 +67,8 @@ public class Application {
      * Main method, used to run the application.
      */
     public static void main(String[] args) throws UnknownHostException {
+    	System.setProperty("gs.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+    	
         SpringApplication app = new SpringApplication(Application.class);
         app.setShowBanner(false);
         SimpleCommandLinePropertySource source = new SimpleCommandLinePropertySource(args);

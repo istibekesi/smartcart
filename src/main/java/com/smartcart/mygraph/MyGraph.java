@@ -79,7 +79,10 @@ public class MyGraph {
 		List<Product> nodes = productRepository.findAll();
 		List<Edge> edges = edgeRepository.findAll();
 		
-		nodes.forEach(n -> graph.addNode(String.valueOf(n.getId())));
+		nodes.forEach(n -> {
+			Node addedNode = graph.addNode(String.valueOf(n.getId()));
+			addedNode.setAttribute("ui.label", n.getName());
+		});
 		edges.forEach(e -> 
 			graph.addEdge(
 					String.valueOf(e.getSourceProduct().getId())+String.valueOf(e.getTargetProduct().getId()),
