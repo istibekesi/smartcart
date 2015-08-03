@@ -67,7 +67,6 @@ public class Application {
      * Main method, used to run the application.
      */
     public static void main(String[] args) throws UnknownHostException {
-    	System.setProperty("gs.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
     	
         SpringApplication app = new SpringApplication(Application.class);
         app.setShowBanner(false);

@@ -104,6 +104,7 @@ public class MyGraph {
 			FileSinkImages pic = new FileSinkImages(OutputType.PNG, Resolutions.VGA);
 			
 			pic.setLayoutPolicy(LayoutPolicy.COMPUTED_FULLY_AT_NEW_IMAGE);
+			pic.setRenderer(FileSinkImages.RendererType.SCALA);
 			
 			pic.writeAll(graph, "src/main/webapp/smartAdmin/smartGraph.png");
 		} catch (IOException e) {
