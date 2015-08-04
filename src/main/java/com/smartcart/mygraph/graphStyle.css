@@ -1,6 +1,9 @@
-graph {
-    fill-color: #FFF, #BBB; fill-mode: gradient-radial;
+node { 
+	size: 5px; 
+} 
+graph { 
+	fill-color: #FFF, #BBB; fill-mode: gradient-radial; 
 }
-node {
-	size: 10px; fill-color: #3ed7e3000, rgba(0,0,0,0); fill-mode: gradient-radial;
+edge {
+	fill-color: rgba(80, 80, 80, 128);
 }
