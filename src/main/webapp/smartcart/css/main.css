@@ -1247,6 +1247,7 @@ form .btn.btn-default {
     letter-spacing: 2px;
     pointer-events: auto;
     border-color: #fff;
+    border-width: 4px;
     -webkit-transition: all .1s ease-in-out;
     -moz-transition: all .1s ease-in-out;
     -o-transition: all .1s ease-in-out;

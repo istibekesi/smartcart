@@ -37,7 +37,7 @@ $(document).ready(function () {
         $.vegas("slideshow", {backgrounds: [
         {src: "img/shop-wp.jpg"}
     ], overlay: true})
-        //("overlay", {src: "img/overlays/16.png"}),
+        ("overlay", {src: "img/overlays/16.png"}),
         $("#vegas-next").click(function () {
         $.vegas("next")
     }), $("#vegas-prev").click(function () {

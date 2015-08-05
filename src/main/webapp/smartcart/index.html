@@ -3,6 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html ng-app="smartCartApp">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +13,7 @@
         <meta name="author" content="">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="shortcut icon" href="/smartcart/favicon.ico" type="image/x-icon">
+        <!--  <link rel="shortcut icon" href="/smartcart/favicon.ico" type="image/x-icon"> -->
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -45,7 +46,7 @@
           <script src="js/plugins/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body ng-controller="MainCtrl">
     
     <!-- welcome begins -->
     <section id="page-welcome" class="page-welcome">
@@ -54,7 +55,7 @@
             <div class="row">
 
                     <p class="intro-text" style="font-size: 46px;font-weight: 100;padding-top: 100px;">
-                        Vásárolj okosan... !
+                        <b>Vásárolj okosan... !</b>	
                     <p class="intro-text">
                     </p>
 
@@ -62,7 +63,7 @@
                     <p>&nbsp;</p>
 					
 
-                <a href="#page-cart" class="btn btn-default-trp learn-more"><span>Start</span></a>
+                <a href="#page-cart" class="btn btn-default-trp learn-more"><span><b>Start</b></span></a>
 
             </div>
         </div>
@@ -85,7 +86,7 @@
         <div class="navbar-collapse collapse" style="font-size: 16px;">
           <ul class="nav navbar-nav nav-effect" id="main-menu">
 
-            <li><a href="#page-welcome"><span data-hover="Home"></span></a></li>
+            <li><a href="#page-welcome"><span data-hover="Home">Nyitó</span></a></li>
 
             <li><a href="#page-cart"><span data-hover="Lista">Lista</span></a></li>
             
@@ -135,7 +136,7 @@
             	
             	
 				<div class="center-block" style="text-align:center;">
-            		Elérhető üzletek
+            		Elérhető üzletek {{hello}}
             	</div>
 
 				<div class="col-sm-1"></div>
@@ -171,6 +172,10 @@
         <script src="js/waypoints.min.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=&sensor=false"></script>
         <script src="js/main.js"></script>
+        
+	    <script src="../bower_components/angular/angular.js"></script>
+	    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+	    <script src="scripts/smartCartApp.js"></script>
 		
     </body>
 </html>
