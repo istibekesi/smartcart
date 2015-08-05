@@ -1705,3 +1705,16 @@ transition: all .3s;
 	width: 100%;
 	height: 100%;
 }
+
+
+html, body, #map-canvas {
+	height: 600px;
+	margin: 0;
+	padding: 0;
+}
+
+.smartMapWrap {	
+	border-style: solid;
+	border-color: #fff;
+    border-width: 4px;
+}
