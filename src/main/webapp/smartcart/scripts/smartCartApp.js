@@ -31,7 +31,10 @@ app.controller('MainCtrl', function($scope, $resource) {
 	 
 	 $scope.selectedShop = {};
 	 
-	 $scope.map = { center: { latitude: 47.093837, longitude: 17.907022 }, zoom: 13 };
+	 $scope.map = { 
+			 center: { latitude: 47.093837, longitude: 17.907022 }, 
+			 zoom: 13,
+			 options : {scrollwheel: false}};
 	 $scope.shopMarkers = [];
 	 
 	 $scope.addMarker = function () {
