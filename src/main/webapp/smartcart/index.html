@@ -39,6 +39,8 @@
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,latin-ext" type="text/css" rel="stylesheet">
+        
+        <link href="../bower_components/angular-ui-select/dist/select.css" type="text/css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -130,9 +132,29 @@
                     <i class="fa fa-shopping-cart "></i> &nbsp;
                 </p>
             </header>
-
             
             <div class="row">
+
+                <div class="col-sm-2"></div>
+            	
+            	<div class="col-sm-10">
+            	  
+					<label>Elérhető boltok: 
+					<select ng-change="addMarker()" ng-model="selectedShop" ng-options="shop.name group by shop.brand for shop in shopData.shops">
+					</select>
+					</label><br />
+					
+				  <div class="col-sm-2"></div>
+				  
+            	</div>
+            	
+            	
+            	
+            	
+            	
+			</div>
+			
+            <!--  <div class="row">
                 <div class="col-sm-2">
             	</div>
             	<div class="col-sm-8">
@@ -142,8 +164,20 @@
             	</div>
             	<div class="col-sm-2">
             	</div>
+            </div> -->            
+            <div class="row">
+                <div class="col-sm-2">
+            	</div>
+            	<div class="col-sm-8">
+            		<div class="smartMapWrap">
+	            		<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+	            			<ui-gmap-markers models="shopMarkers" coords="'self'"></ui-gmap-markers>
+	            		</ui-gmap-google-map>
+	            	</div>
+            	</div>
+            	<div class="col-sm-2">
+            	</div>
             </div>
-            
             
             
             <!-- 
@@ -184,10 +218,17 @@
 	<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&v=3.exp"></script>
 	<script src="scripts/shopMap.js"></script>
 	
+	
 	<script src="js/main.js"></script>
 	
 	<script src="../bower_components/angular/angular.js"></script>
 	<script src="../bower_components/angular-resource/angular-resource.js"></script>
+	<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="../bower_components/angular-ui-select/dist/select.js"></script>
+	
+	<script src='../bower_components/lodash/lodash.js'></script>
+	<script src='../bower_components/angular-google-maps/dist/angular-google-maps.js'></script>
+	
 	<script src="scripts/smartCartApp.js"></script>
 		
     </body>
