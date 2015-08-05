@@ -163,7 +163,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 20px 20px 0
 }
 
-#page-services {
+#page-cart {
     padding: 75px 0;
     background: #f7f7f7;
     text-align: center
@@ -1296,7 +1296,7 @@ label.valid {
 }
 
 .gmap {
-    border: 0;
+    border: solid 2px #fff;;
     width: 350px;
     height: 350px
 }
@@ -1498,7 +1498,7 @@ label.valid {
         font-size: 1.2em
     }
 
-    #page-services {
+    #page-cart {
         text-align: center
     }
 
@@ -1687,4 +1687,20 @@ transition: all .3s;
 
 #qLpercentage {
     fontSize: "5em";
+}
+
+.iframe-rwd {
+	position: relative;
+	padding-bottom: 65.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.iframe-rwd iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
