@@ -1,0 +1,20 @@
+{
+    "smartcartApp": {
+        "brand" : {
+            "home": {
+                "title": "Brands",
+                "createLabel": "Créer un nouveau Brand",
+                "createOrEditLabel": "Créer ou éditer un Brand"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Brand {{ id }} ?"
+            },
+            "detail": {
+                "title": "Brand"
+            },
+            "brand": "Brand",
+            "shop": "shop"
+        }
+    }
+}
+

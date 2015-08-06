@@ -1,0 +1,42 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "shop",
+            "relationshipNameCapitalized": "Shop",
+            "relationshipFieldName": "shop",
+            "otherEntityName": "shop",
+            "relationshipType": "one-to-many",
+            "otherEntityNameCapitalized": "Shop",
+            "otherEntityRelationshipName": "brand"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "brand",
+            "fieldType": "Brands",
+            "fieldIsEnum": true,
+            "fieldValues": "TESCO,SPAR,LIDL,ALDI,PENNY,AUCHAN",
+            "fieldNameCapitalized": "Brand",
+            "fieldNameUnderscored": "brand",
+            "fieldInJavaBeanMethod": "Brand",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOwnerOneToOne": false,
+    "fieldsContainOneToMany": true,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150806165102",
+    "dto": "no",
+    "pagination": "no",
+    "validation": true
+}

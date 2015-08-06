@@ -9,11 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.smartcart.domain.Brand;
 import com.smartcart.domain.Category;
 import com.smartcart.domain.Edge;
 import com.smartcart.domain.Price;
 import com.smartcart.domain.Product;
 import com.smartcart.domain.Shop;
+import com.smartcart.repository.BrandRepository;
 import com.smartcart.repository.CategoryRepository;
 import com.smartcart.repository.EdgeRepository;
 import com.smartcart.repository.PriceRepository;
@@ -42,6 +44,9 @@ public class DatabaseInitializerService {
 	@Inject
 	private ShopRepository shopRepository;
 	
+	@Inject
+	private BrandRepository brandRepository;
+	
     public boolean loadData() {
         log.debug("Database initialization started...");
         
@@ -66,13 +71,16 @@ public class DatabaseInitializerService {
 
         List<Edge> edges = DatabaseInitializerHelper.initEdges(products);
         
-        List<Shop> shops =  DatabaseInitializerHelper.initShops();
+        List<Brand> brands =  DatabaseInitializerHelper.initBrands();
+        
+        List<Shop> shops =  DatabaseInitializerHelper.initShops(brands);
 
         List<Price> prices =  DatabaseInitializerHelper.initPrices(products, shops);
 
         categories.forEach(c -> callBfs(c));
         products.forEach(p -> productRepository.save(p));
         edges.forEach(e -> edgeRepository.save(e));
+        brands.forEach(b -> brandRepository.save(b));
         shops.forEach(s -> shopRepository.save(s));
         prices.forEach(p -> priceRepository.save(p));
         

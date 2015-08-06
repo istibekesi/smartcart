@@ -11,11 +11,13 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.smartcart.domain.Brand;
 import com.smartcart.domain.Category;
 import com.smartcart.domain.Edge;
 import com.smartcart.domain.Price;
 import com.smartcart.domain.Product;
 import com.smartcart.domain.Shop;
+import com.smartcart.domain.enumeration.BrandsEnum;
 import com.smartcart.domain.enumeration.UnitEnum;
 
 public class DatabaseInitializerHelper {
@@ -55,14 +57,28 @@ public class DatabaseInitializerHelper {
         
 	}
 	
-	public static List<Shop> initShops() {
+	public static List<Brand> initBrands() {
+		List<Brand> brands = new ArrayList<Brand>();
+		brands.add(new Brand(BrandsEnum.TESCO));
+		brands.add(new Brand(BrandsEnum.SPAR));
+		brands.add(new Brand(BrandsEnum.LIDL));
+		brands.add(new Brand(BrandsEnum.ALDI));
+		brands.add(new Brand(BrandsEnum.PENNY));
+		brands.add(new Brand(BrandsEnum.AUCHAN));
+		return brands;
+	}
+	
+	public static List<Shop> initShops(List<Brand> brands) {
+		
+		Brand tescoBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.TESCO).findFirst().get();
+		Brand sparBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.SPAR).findFirst().get();
+		Brand aldiBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.ALDI).findFirst().get();
+		
 		List<Shop> shops = new ArrayList<Shop>();
-		shops.add(new Shop("TESCO"));
-		shops.add(new Shop("INTERSPAR"));
-		shops.add(new Shop("LIDL"));
-		shops.add(new Shop("ALDI"));
-		shops.add(new Shop("PENNY"));
-		shops.add(new Shop("CBA"));
+		shops.add(new Shop("TESCO Veszprém Hipermarket", tescoBrand));
+		shops.add(new Shop("TESCO Veszprém Szupermarket", tescoBrand));
+		shops.add(new Shop("Interspar", sparBrand));
+		shops.add(new Shop("Aldi", aldiBrand));
 		return shops;
 	}
 
@@ -151,7 +167,7 @@ public class DatabaseInitializerHelper {
 	public static List<Price> initPrices(List<Product> products, List<Shop> shops) {
 		List<Price> prices = new ArrayList<Price>();
         prices.add(Price.priceBuilder(products, shops, "5990000000001", "TESCO", new BigDecimal(199)));
-        prices.add(Price.priceBuilder(products, shops, "5990000000001", "INTERSPAR", new BigDecimal(229)));
+        prices.add(Price.priceBuilder(products, shops, "5990000000001", "SPAR", new BigDecimal(229)));
         prices.add(Price.priceBuilder(products, shops, "5990000000001", "ALDI", new BigDecimal(219)));
         
         prices.add(Price.priceBuilder(products, shops, "5998818171577", "TESCO", new BigDecimal(249)));

@@ -7,11 +7,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -21,45 +21,37 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.smartcart.domain.enumeration.BrandsEnum;
 
 /**
- * A Shop.
+ * A Brand.
  */
 @Entity
-@Table(name = "SHOP")
+@Table(name = "BRAND")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName="shop")
-public class Shop implements Serializable {
+@Document(indexName="brand")
+public class Brand implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "brand", nullable = false)
+    private BrandsEnum brand;
 
-    @Column(name = "address")
-    private String address;
-
-    @OneToMany(mappedBy = "price")
+    @OneToMany(mappedBy = "brand")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Price> prices = new HashSet<>();
+    private Set<Shop> shops = new HashSet<>();
     
-    @ManyToOne(optional=false)
-    @JoinColumn(name="brand_id", referencedColumnName="id", insertable=true, updatable=true)
-    private Brand brand;
+    public Brand(){};
+    
+    public Brand(BrandsEnum b){
+    	this.brand = b;
+    };
 
-    public Shop(){}
-    
-    public Shop(String name, Brand brand){
-    	this.name = name;
-    	this.brand = brand;
-    }
-    
-    
     public Long getId() {
         return id;
     }
@@ -68,39 +60,23 @@ public class Shop implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public BrandsEnum getBrand() {
+        return brand;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBrand(BrandsEnum brand) {
+        this.brand = brand;
     }
 
-    public String getAddress() {
-        return address;
+    public Set<Shop> getShops() {
+        return shops;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setShops(Set<Shop> shops) {
+        this.shops = shops;
     }
 
-    public Set<Price> getPrices() {
-        return prices;
-    }
-
-    public void setPrices(Set<Price> prices) {
-        this.prices = prices;
-    }
-
-    public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -109,10 +85,9 @@ public class Shop implements Serializable {
             return false;
         }
 
-        Shop shop = (Shop) o;
+        Brand brand = (Brand) o;
 
-        if ( ! Objects.equals(id, shop.id)) return false;
-        if ( ! Objects.equals(name, shop.name)) return false;
+        if ( ! Objects.equals(id, brand.id)) return false;
 
         return true;
     }
@@ -124,10 +99,9 @@ public class Shop implements Serializable {
 
     @Override
     public String toString() {
-        return "Shop{" +
+        return "Brand{" +
                 "id=" + id +
-                ", name='" + name + "'" +
-                ", address='" + address + "'" +
+                ", brand='" + brand + "'" +
                 '}';
     }
 }

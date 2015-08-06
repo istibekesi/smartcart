@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 
@@ -28,6 +30,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName="price")
 public class Price implements Serializable {
+	
+	private final static Logger log = LoggerFactory.getLogger(Price.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -106,12 +110,21 @@ public class Price implements Serializable {
                 '}';
     }
 
-	public static Price priceBuilder(List<Product> products, List<Shop> shops, String productBar,	String shopName, BigDecimal bigDecimal) {
-		Product p1 = products.stream().filter(p -> p.getBarcode().equals(productBar))
-				.findFirst().get();
+	public static Price priceBuilder(List<Product> products, List<Shop> shops, String productBar, String brandName, BigDecimal bigDecimal) {
+		Product p1 = products.stream()
+				.filter(p -> p.getBarcode().equals(productBar))
+				.findFirst()
+				.get();
 
-		Shop s1 = shops.stream().filter(s -> s.getName().equals(shopName))
-				.findFirst().get();
+		Shop s1 = null;
+		try {
+		s1 = shops.stream()
+				.filter(s -> s.getBrand().getBrand().name().equalsIgnoreCase(brandName))
+				.findFirst()
+				.get();
+		} catch (Exception e) {
+			log.error("Not found brandname? " + brandName, e);
+		}
 
 		return priceBuilder(p1, s1, bigDecimal);
 		

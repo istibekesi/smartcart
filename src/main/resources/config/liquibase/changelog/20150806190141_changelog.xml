@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+   <changeSet author="ibekesi (generated)" id="1438880512513-1">
+      <addColumn tableName="SHOP">
+         <column name="brand_id" type="int8">
+            <constraints nullable="false"/>
+         </column>
+      </addColumn>
+   </changeSet>
+   <changeSet author="ibekesi (generated)" id="1438880512513-2">
+      <addForeignKeyConstraint baseColumnNames="brand_id"
+                               baseTableName="SHOP"
+                               constraintName="fk_brand_id"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="BRAND"/>
+   </changeSet>
+   <changeSet author="ibekesi (generated)" id="1438880512513-3">
+      <addForeignKeyConstraint baseColumnNames="shop_id"
+                               baseTableName="PRICE"
+                               constraintName="fk_shop_id"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="SHOP"/>
+   </changeSet>
+</databaseChangeLog>
