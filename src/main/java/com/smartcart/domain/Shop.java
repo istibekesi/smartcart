@@ -43,7 +43,7 @@ public class Shop implements Serializable {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "price")
+    @OneToMany(mappedBy = "shop")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Price> prices = new HashSet<>();
