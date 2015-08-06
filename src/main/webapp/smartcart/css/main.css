@@ -1690,29 +1690,6 @@ transition: all .3s;
     fontSize: "5em";
 }
 
-.iframe-rwd {
-	position: relative;
-	padding-bottom: 65.25%;
-	padding-top: 30px;
-	height: 0;
-	overflow: hidden;
-}
-
-.iframe-rwd iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
-
-html, body, #map-canvas {
-	height: 600px;
-	margin: 0;
-	padding: 0;
-}
-
 .smartMapWrap {	
 	border-style: solid;
 	border-color: #fff;

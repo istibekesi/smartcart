@@ -29,7 +29,29 @@ app.controller('MainCtrl', function($scope, $resource) {
 			 ]
 	 }
 	 
-	 $scope.selectedShop = {};
+	 var updateMarkers = function () {
+		 var markers = [];
+		 var i = 0;
+		 $scope.shopData.shops.forEach(function(s) {
+			 var r = { 
+					 id: i, 
+					 latitude : s.lat, 
+					 longitude : s.lng,
+					 title : s.name,
+					 show : false
+			 };
+			 
+			 r.onClick = function() {
+			 	 r.show = !r.show;
+			 };
+			 markers.push(r);
+			 i++;
+		 });
+		 return markers;
+	 }
+	 $scope.markers = updateMarkers();
+	 
+	 $scope.selectedShop = $scope.shopData.shops[0];
 	 
 	 $scope.map = { 
 			 center: { latitude: 47.093837, longitude: 17.907022 }, 
@@ -37,7 +59,16 @@ app.controller('MainCtrl', function($scope, $resource) {
 			 options : {scrollwheel: false}};
 	 $scope.shopMarkers = [];
 	 
-	 $scope.addMarker = function () {
+	 $scope.selectMarker = function () {
+		 
+		 $scope.markers.forEach(function(mark) {
+			 if ($scope.selectedShop.lat == mark.latitude && $scope.selectedShop.lng == mark.longitude) {
+				 mark.show = true;
+			 } else {
+				 mark.show = false;
+			 }
+		 });
+		 
 		 $scope.shopMarkers = [
 		   {"latitude":$scope.selectedShop.lat,"longitude":$scope.selectedShop.lng,"id":0}  
 		 ];

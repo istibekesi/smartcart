@@ -140,60 +140,37 @@
             	<div class="col-sm-10">
             	  
 					<label>Elérhető boltok: 
-					<select ng-change="addMarker()" ng-model="selectedShop" ng-options="shop.name group by shop.brand for shop in shopData.shops">
-					</select>
-					</label><br />
+					</label>
+					<select ng-change="selectMarker()" ng-model="selectedShop" ng-options="shop.name group by shop.brand for shop in shopData.shops">
+					</select><br/>
 					
 				  <div class="col-sm-2"></div>
 				  
             	</div>
             	
-            	
-            	
-            	
-            	
 			</div>
 			
-            <!--  <div class="row">
-                <div class="col-sm-2">
-            	</div>
-            	<div class="col-sm-8">
-            		<div class="smartMapWrap">
-	            		<div id="map-canvas"></div>
-	            	</div>
-            	</div>
-            	<div class="col-sm-2">
-            	</div>
-            </div> -->            
             <div class="row">
                 <div class="col-sm-2">
             	</div>
             	<div class="col-sm-8">
             		<div class="smartMapWrap">
+            		
 	            		<ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
-	            			<ui-gmap-markers models="shopMarkers" coords="'self'"></ui-gmap-markers>
+	            			<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="onClick">
+								<ui-gmap-windows show="show">
+                					<div ng-non-bindable style="color: #333333">{{title}}</div>
+            					</ui-gmap-windows>
+	            			</ui-gmap-markers>
 	            		</ui-gmap-google-map>
+	            		
+	            		
 	            	</div>
             	</div>
             	<div class="col-sm-2">
             	</div>
             </div>
             
-            
-            <!-- 
-            <div class="row">
-				<div class="center-block" style="text-align:center;">
-            		Elérhető üzletek
-            	</div>
-
-				<div class="col-sm-1"></div>
-				<div class="iframe-rwd col-sm-10">
-					<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q=Veszpr%C3%A9m%2C%20Hungary&key=AIzaSyDUd-FQRUaYwsBWSSXEH9H9qSx5g-yPM88" allowfullscreen></iframe> 
-				</div>
-				<div class="col-sm-1"></div>
-			</div>
-			 -->
-
         </div>
     </section>
     <!-- contact ends -->
@@ -214,10 +191,7 @@
 	<script src="js/jquery.countTo.js"></script>
 	<script src="js/waypoints.min.js"></script>
 	
-	<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=&sensor=false"></script> -->
 	<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&v=3.exp"></script>
-	<script src="scripts/shopMap.js"></script>
-	
 	
 	<script src="js/main.js"></script>
 	
