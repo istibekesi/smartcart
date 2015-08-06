@@ -1,40 +1,24 @@
 var app = angular.module('smartCartApp', ['ngResource', 'ui.select', 'ngSanitize', 'uiGmapgoogle-maps']);
 
-app.controller('MainCtrl', function($scope, $resource) {
+app.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyDUd-FQRUaYwsBWSSXEH9H9qSx5g-yPM88',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
+})
+
+app.controller('MainCtrl', function($scope, $resource, uiGmapGoogleMapApi) {
 
 	 $scope.shopData = {
-			 shops : [
-			          {
-			        	  brand : "TESCO",
-			        	  name : "TESCO Veszprém Hipermarket",
-			        	  address: "8200 Külső-Kádártai út",
-			        	  lat: 47.103660,
-			        	  lng: 17.934070
-			          },
-			          {
-			        	  brand : "TESCO",
-			        	  name : "TESCO Veszprém Szupermarket",
-			        	  address: "8200 Mártírok útja 13.",
-			        	  lat: 47.0843779,
-			        	  lng: 17.9134511
-			          },
-			          {
-			        	  brand : "INTERSPAR",
-			        	  name : "Interspar",
-			        	  address: "8200 Dornyai Béla u. 4",
-			        	  lat: 47.084550,
-			        	  lng: 17.925922
-			          }
-			          
-			 ]
+			 shops : []
 	 }
 	 
 	 var updateMarkers = function () {
 		 var markers = [];
-		 var i = 0;
 		 $scope.shopData.shops.forEach(function(s) {
 			 var r = { 
-					 id: i, 
+					 id: s.id, 
 					 latitude : s.lat, 
 					 longitude : s.lng,
 					 title : s.name,
@@ -45,13 +29,9 @@ app.controller('MainCtrl', function($scope, $resource) {
 			 	 r.show = !r.show;
 			 };
 			 markers.push(r);
-			 i++;
 		 });
 		 return markers;
 	 }
-	 $scope.markers = updateMarkers();
-	 
-	 $scope.selectedShop = $scope.shopData.shops[0];
 	 
 	 $scope.map = { 
 			 center: { latitude: 47.093837, longitude: 17.907022 }, 
@@ -59,20 +39,51 @@ app.controller('MainCtrl', function($scope, $resource) {
 			 options : {scrollwheel: false}};
 	 $scope.shopMarkers = [];
 	 
+	 
 	 $scope.selectMarker = function () {
-		 
-		 $scope.markers.forEach(function(mark) {
-			 if ($scope.selectedShop.lat == mark.latitude && $scope.selectedShop.lng == mark.longitude) {
-				 mark.show = true;
-			 } else {
-				 mark.show = false;
+		 if ($scope.selectedShop.id) {
+			 $scope.markers.forEach(function(mark) {
+				 
+				 	console.log($scope.markers);
+				 
+					 if ($scope.selectedShop.id == mark.id) {
+						 mark.show = true;
+					 } else {
+						 mark.show = false;
+					 }
+			 });
+			 $scope.shopMarkers = [
+			   {"latitude":$scope.selectedShop.lat,"longitude":$scope.selectedShop.lng,"id":0}  
+			 ];
+		 }
+	 }
+	 
+	 var ShopResource = $resource('/api/shops/:shopId',
+	 			 {shopId:'@shopId'}, {});
+
+	 uiGmapGoogleMapApi.then(function(maps) {
+		 var shopsPromise = ShopResource.query(function() {
+			 if (shopsPromise) {
+				 $scope.shopData.shops = [];
+				 console.log("Shops loaded:" + shopsPromise.length)
+				 
+				 shopsPromise.forEach(function(s) {
+					 $scope.shopData.shops.push({
+						 id : s.id,
+						 brand : s.brand.brand,
+						 name : s.name,
+						 address : s.address,
+						 lat : s.lat,
+						 lng : s.lng
+					 });
+				 });
+				 
+				 $scope.markers = updateMarkers();
+				 $scope.selectedShop = $scope.shopData.shops[0];
+				 
 			 }
 		 });
-		 
-		 $scope.shopMarkers = [
-		   {"latitude":$scope.selectedShop.lat,"longitude":$scope.selectedShop.lng,"id":0}  
-		 ];
-		 
-	 }
+	 }); 
+	 
 	
 });

@@ -73,12 +73,23 @@ public class DatabaseInitializerHelper {
 		Brand tescoBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.TESCO).findFirst().get();
 		Brand sparBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.SPAR).findFirst().get();
 		Brand aldiBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.ALDI).findFirst().get();
+		Brand lidlBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.LIDL).findFirst().get();
+		Brand pennyBrand = brands.stream().filter(b -> b.getBrand() == BrandsEnum.PENNY).findFirst().get();
 		
 		List<Shop> shops = new ArrayList<Shop>();
-		shops.add(new Shop("TESCO Veszprém Hipermarket", tescoBrand));
-		shops.add(new Shop("TESCO Veszprém Szupermarket", tescoBrand));
-		shops.add(new Shop("Interspar", sparBrand));
-		shops.add(new Shop("Aldi", aldiBrand));
+		shops.add(new Shop("TESCO Veszprém Hipermarket", tescoBrand, "8200 Külső-Kádártai út", 47.103660, 17.934070));
+		shops.add(new Shop("TESCO Veszprém Szupermarket", tescoBrand, "8200 Mártírok útja 13.", 47.0843779 , 17.9134511));
+		shops.add(new Shop("Interspar", sparBrand, "8200 Dornyai Béla u. 4", 47.084550, 17.925922));
+		shops.add(new Shop("Spar", sparBrand, "", 47.0850029, 17.930064));
+		shops.add(new Shop("Spar", sparBrand, "", 47.093872, 17.910948));
+		shops.add(new Shop("Spar", sparBrand, "", 47.107369, 17.910656));
+		shops.add(new Shop("Aldi", aldiBrand, "", 47.082114, 17.925304));
+		shops.add(new Shop("Aldi", aldiBrand, "", 47.109248, 17.927399));
+		shops.add(new Shop("Lidl", lidlBrand, "", 47.111018, 17.926452));
+		shops.add(new Shop("Lidl", lidlBrand, "", 47.087072, 17.922268));
+		shops.add(new Shop("Penny", pennyBrand, "", 47.096322, 17.926697));
+		shops.add(new Shop("Penny", pennyBrand, "", 47.112910, 17.923899));
+		shops.add(new Shop("Penny", pennyBrand, "", 47.101895, 17.898318));
 		return shops;
 	}
 

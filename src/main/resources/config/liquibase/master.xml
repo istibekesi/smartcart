@@ -28,5 +28,6 @@
     <include file="classpath:config/liquibase/changelog/20150806165102_added_entity_Brand.xml" relativeToChangelogFile="false"/>
     
     <include file="classpath:config/liquibase/changelog/20150806190141_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150806201104_changelog.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

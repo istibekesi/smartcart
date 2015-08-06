@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+   <changeSet author="ibekesi (generated)" id="1438884673668-1">
+      <addColumn tableName="SHOP">
+         <column name="lat" type="float8"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="ibekesi (generated)" id="1438884673668-2">
+      <addColumn tableName="SHOP">
+         <column name="lng" type="float8"/>
+      </addColumn>
+   </changeSet>
+</databaseChangeLog>

@@ -42,6 +42,13 @@ public class Shop implements Serializable {
 
     @Column(name = "address")
     private String address;
+    
+    @Column(name = "lat")
+    private Double lat;
+    
+    @Column(name = "lng")
+    private Double lng;
+    
 
     @OneToMany(mappedBy = "shop")
     @JsonIgnore
@@ -54,9 +61,12 @@ public class Shop implements Serializable {
 
     public Shop(){}
     
-    public Shop(String name, Brand brand){
+    public Shop(String name, Brand brand, String address, double lat, double lng){
     	this.name = name;
     	this.brand = brand;
+    	this.address = address;
+    	this.lat = lat;
+    	this.lng = lng;
     }
     
     
@@ -98,6 +108,22 @@ public class Shop implements Serializable {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+	
+	public Double getLat() {
+		return lat;
+	}
+
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+
+	public Double getLng() {
+		return lng;
+	}
+
+	public void setLng(Double lng) {
+		this.lng = lng;
 	}
 
 	@Override
