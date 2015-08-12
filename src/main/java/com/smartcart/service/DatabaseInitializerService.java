@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.smartcart.domain.Brand;
 import com.smartcart.domain.Category;
@@ -21,35 +23,53 @@ import com.smartcart.repository.EdgeRepository;
 import com.smartcart.repository.PriceRepository;
 import com.smartcart.repository.ProductRepository;
 import com.smartcart.repository.ShopRepository;
+import com.smartcart.repository.search.ProductSearchRepository;
 import com.smartcart.service.util.DatabaseInitializerHelper;
 
 
+
 @Service
+@Transactional
 public class DatabaseInitializerService {
 
 	private final Logger log = LoggerFactory.getLogger(DatabaseInitializerService.class);
 	
 	@Inject
-	private CategoryRepository categoryRepository;
+	public CategoryRepository categoryRepository;
 	
 	@Inject
-	private EdgeRepository edgeRepository;
+	public EdgeRepository edgeRepository;
 	
 	@Inject
-	private ProductRepository productRepository;
+	public ProductRepository productRepository;
 	
 	@Inject
-	private PriceRepository priceRepository;
+	public ProductSearchRepository productSearchRepository;
 	
 	@Inject
-	private ShopRepository shopRepository;
+	public PriceRepository priceRepository;
 	
 	@Inject
-	private BrandRepository brandRepository;
+	public ShopRepository shopRepository;
+	
+	@Inject
+	public BrandRepository brandRepository;
+	
 	
     public boolean loadData() {
         log.debug("Database initialization started...");
         
+        truncateDatabase();
+        
+        rebuildDatabase();
+        
+        //buildDatabaseIndex();
+        
+        log.debug("Database initialization finished!");
+        return true;
+    }
+    
+    public void truncateDatabase() {
         edgeRepository.deleteAll();
         log.debug("Database initialization - Edges deleted!");
         
@@ -62,9 +82,16 @@ public class DatabaseInitializerService {
         productRepository.deleteAll();
         log.debug("Database initialization - Products deleted!");
         
+        productSearchRepository.deleteAll();
+        log.debug("Database initialization - Products deleted!");
+        
         categoryRepository.deleteAll();
         log.debug("Database initialization - Categories deleted!");
         
+        
+    }
+    
+    public void rebuildDatabase() {
         List<Category> categories = DatabaseInitializerHelper.initCategories();
         
         List<Product> products = DatabaseInitializerHelper.initProducts(categories);
@@ -84,8 +111,23 @@ public class DatabaseInitializerService {
         shops.forEach(s -> shopRepository.save(s));
         prices.forEach(p -> priceRepository.save(p));
         
-        log.debug("Database initialization finished!");
-        return true;
+    }
+    
+    public void buildDatabaseIndex() {
+    	
+    	
+        log.debug("Indexin the products... ?");
+        List<Product> allSavedProds = productRepository.findAll();
+        
+        allSavedProds.forEach(
+       		prod -> {
+       			Hibernate.initialize(prod.getProductPrices());
+       			
+       			// TODO : fix this shit
+       			//productSearchRepository.index( prod );
+       		}
+        );
+        
     }
     
     /**

@@ -49,6 +49,10 @@ public class Price implements Serializable {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    public Price() {
+    	// default
+    }
+    
     public Long getId() {
         return id;
     }

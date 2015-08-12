@@ -67,10 +67,15 @@ public class Product implements Serializable {
     private Category category;
     
     @OneToMany(mappedBy = "product")
-    private Set<Price> productPrices = new HashSet<>();
+    private Set<Price> productPrices = new HashSet<Price>();
     
 
     public Product() {};
+    
+    public Product(Long id, String name) {
+    	this.id = id;
+    	this.name = name;
+    };
     
     public Product (String barcode, String name, String description, UnitEnum unit, long quantity) {
     	this.barcode = barcode;
